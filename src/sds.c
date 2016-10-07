@@ -579,6 +579,8 @@ sds sdscatprintf(sds s, const char *fmt, ...) {
  * %U - 64 bit unsigned integer (unsigned long long, uint64_t)
  * %% - Verbatim "%" character.
  */
+
+//函数有些问题，就是 当 fmt 为 %的时候。
 sds sdscatfmt(sds s, char const *fmt, ...) {
     size_t initlen = sdslen(s);
     const char *f = fmt;
@@ -1112,7 +1114,6 @@ int sdsTest(void) {
 
         test_cond("Create a string and obtain the length",
             sdslen(x) == 3 && memcmp(x,"foo\0",4) == 0)
-
         sdsfree(x);
         x = sdsnewlen("foo",2);
         test_cond("Create a string with specified length",
